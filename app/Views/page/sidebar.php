@@ -4,9 +4,10 @@
      <!-- Sidebar - Brand -->
      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/start">
          <div class="sidebar-brand-icon rotate-n-15">
-             <i class="fas fa-book fa-lg"></i>
+             <i class="fas fa-pencil-alt fa-spin fa-xs"></i>
          </div>
-         <div class="sidebar-brand-text mx-3">get learn<sup>&nbsp;2</sup></div>
+         <!-- <div class="sidebar-brand-text mx-3">book TBK<sup>&nbsp;2</sup> </div> -->
+         <div class="sidebar-brand-text mx-3">TBK library</div>
      </a>
 
      <!-- Divider -->

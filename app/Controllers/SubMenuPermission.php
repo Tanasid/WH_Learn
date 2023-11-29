@@ -19,7 +19,7 @@ class SubMenuPermission extends Controller
         WHERE mm.smm_id = ?
         AND pd.spd_status_flg = 1
         AND pd.spg_id = ?
-        ORDER BY md.smd_order", [$smmId, $session->get('spg_id')]);
+        ORDER BY md.smd_order ASC", [$smmId, $session->get('spg_id')]);
 
         $data = $query->getResultArray(); // Fetch results as an array
 

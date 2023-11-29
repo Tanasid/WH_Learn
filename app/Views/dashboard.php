@@ -7,12 +7,11 @@ if ($session->has('altLogin')) {
 ?>
 
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Dashboard</h1>
-    <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
+    <!-- <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
         The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
-            documentation</a>.</p>
+            documentation</a>.</p> -->
 
     <!-- Content Row -->
     <div class="row">
@@ -110,9 +109,22 @@ if ($session->has('altLogin')) {
                 </div>
             </div>
 
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Videos</h6>
+                </div>
+                <div class="card-body">
+                    <div class="video-content d-flex justify-content-center">
+                        <iframe class="border-pill" width="70%" height="530" src="https://www.youtube.com/embed/K7EivjQY0KE?si=libqYw_Qk0JqgSis" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Styling for the area chart can be found in the
+                    <code>Are you ready for learning ??</code>
+                </div>
+            </div>
+
         </div>
     </div>
-
-
-
+    
 </div>

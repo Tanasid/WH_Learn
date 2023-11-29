@@ -14,7 +14,7 @@
             <input type="text" class="form-control" id="inpMainMenuName" placeholder="Enter your name menu ...">
         </div>
         <div class="col-md-6 mx-auto">
-            <label class="fs-4" for="">Main Menu Icon</label> <button class="btn btn-none" data-bs-toggle="modal" data-bs-target="#mdlICon"><i class="far fa-comment-dots fa-lg"></i></button>
+            <label class="fs-4" for="">Main Menu Icon</label> <button class="btn btn-none" data-bs-toggle="modal" data-bs-target="#mdlICon"><i class="far fa-comment-dots fa-spin fa-lg"></i></i></i></button>
             <input type="text" class="form-control" id="inpMainMenuIcon" data-bs-toggle="modal" data-bs-target="#mdlICon" placeholder="Icon name menu ..." disabled>
         </div>
     </div>

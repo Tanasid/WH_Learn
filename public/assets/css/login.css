@@ -9,7 +9,7 @@
 }
 
 body {
-    background-image: url('https://www.creativefabrica.com/wp-content/uploads/2022/05/17/Luxury-Gold-and-Black-Background-Design-Graphics-30685945-1.jpg');
+    background-image: url('/assets/image/TBKK151124-082.jpg');
     font-family: 'Livvic', sans-serif !important;
     background-position: center;
     background-size: cover;
@@ -22,16 +22,17 @@ html {
 }
 
 .login-box {
+    filter: blur(0.5px);
     position: absolute;
     top: 50%;
     left: 50%;
     width: 400px;
     padding: 40px;
     transform: translate(-50%, -50%);
-    background: rgba(3, 3, 3, 0.664);
+    background: rgba(66, 143, 206, 0.685);
     box-sizing: border-box;
     box-shadow: 0 0 25px rgba(87, 87, 87, 0.8);
-    border-radius: 10px;
+    border-radius: 10px; 
 }
 
 .login-box h1 {

@@ -35,7 +35,7 @@ $(() => {
                                 <td class="text-center">${btnStatus}</td>
                                 <td class="text-center">
                                     <button data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEditAcc" class="custom-btn btn-12" data-id="${data.su_id}">
-                                        <span>Click!</span><span>Edit</span>
+                                        <span>Edit</span><span><i class="fas fa-wrench fa-lg"></i></span>
                                     </button>
                                 </td>
                             </tr>`;

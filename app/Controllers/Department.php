@@ -121,8 +121,7 @@ class Department extends Controller
         $checkName = $db->query("SELECT sd_department_name FROM sys_department WHERE sd_department_name = '$sd_department_name' AND sd_id <> $sd_id ");
         $ResultName = $checkName->getResultArray();
         if (count($ResultName) >= 1) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Department Name is 
-            already exist']);
+            return $this->response->setJSON(['success' => false, 'message' => 'Department Name is already exist']);
         } else {
             $query = $db->query("UPDATE sys_department
             SET sd_department_name = '$sd_department_name', sd_updated_date = '$sd_date', sd_updated_by = '$sd_by' WHERE sd_id = $sd_id");

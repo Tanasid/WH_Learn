@@ -183,7 +183,7 @@ $(() => {
                                     <td class="text-center">${data.spd_updated_by}</td>
                                     <td class="text-center">
                                         <button class="custom-btn btn-12" data-bs-toggle="modal" data-bs-target="#mdlEditSubMenu" id="btnEditSubMenu" data-id="${data.smd_id}">
-                                            <span>Click!</span><span>Edit</span>
+                                            <span>Edit</span><span><i class="fas fa-wrench fa-lg"></i></span>
                                         </button>
                                     </td>
                                 </tr>`;

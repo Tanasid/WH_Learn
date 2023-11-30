@@ -104,6 +104,9 @@ $routes->get('/department/getDepartment', 'Department::getDepartment',);
 $routes->get('/department/getDepartmentByID', 'Department::getDepartmentByID',);
 $routes->post('/department/updateDepartment', 'Department::updateDepartment',);
 
+// Subject //
+$routes->get('/subject', 'Subject::index', ['filter' => 'auth']);
+
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);
 $routes->get('/logout', 'Login::logout');

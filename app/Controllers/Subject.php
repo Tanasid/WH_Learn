@@ -115,5 +115,17 @@ class Subject  extends Controller
         }
     }
 
+    public function getSubjectByID()
+    {
+        $ss_id = $this->request->getVar('ss_id');
+
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT * FROM sys_subject WHERE ss_id = ?", [$ss_id]);
+
+        $data = $query->getResultArray(); // Fetch results as an array
+
+        return $this->response->setJSON($data); // Return JSON response
+    }
+
 
 }

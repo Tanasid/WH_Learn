@@ -82,27 +82,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="image-container" id="contentPreview">
-                    <img src="" alt="Image Preview" id="imagePreview" class="img-fluid">
-                    <div class="hover-text">Click to open new tap ...</div>
+                <div class="embed-responsive embed-responsive-16by9" id="contentPreview">
+                    <!-- <img src="" alt="Image Preview" id="imagePreview" class="img-fluid"> -->
+                    <iframe src="" frameborder="0" style="object-fit: contain;" class="embed-responsive-item" title="Document" width="100%" height="100%" id="imagePreview" allowfullscreen></iframe>
+                    <!-- <div class="hover-text">Click to open new tap ...</div> -->
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="iconHover">
+                    <button type="button" class="btn btn-none border border-light-emphasis shadow-sm rounded " id="btn_newTap">Open New Tap</button>
+                </div>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Edit Subject Modal -->
-<div class="modal fade bg-dark" data-bs-keyboard="false" id="mdlEditDepartment" tabindex="-1" aria-labelledby="mdlEditDepartment" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" data-bs-keyboard="false" id="mdlEditSubject" tabindex="-1" aria-labelledby="mdlEditSubject" aria-hidden="true" data-bs-backdrop="none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-3 text-decoration-underline" style="color: #ffc40c;">Edit Subject</h5>
-                <button type="button" class="btn-close" id="closeMdlEditDepartment" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" id="closeMdlEditSubject" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="mdlFormEditDepartment">
+            <div class="modal-body" id="mdlFormEditSubject">
                 <!-- Form -->
 
             </div>

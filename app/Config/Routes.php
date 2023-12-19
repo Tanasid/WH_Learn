@@ -110,6 +110,7 @@ $routes->get('/subject/getSubject', 'Subject::getSubject',);
 $routes->get('/subject/getSubjectByStatus', 'Subject::getSubjectByStatus',);
 $routes->post('/subject/addSubject', 'Subject::addSubject',);
 $routes->post('/subject/updateStatusFlg', 'Subject::updateStatusFlg',);
+$routes->get('/subject/getSubjectByID', 'Subject::getSubjectByID',);
 
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);

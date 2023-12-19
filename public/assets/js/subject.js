@@ -3,9 +3,10 @@ $(() => {
     addSubject()
     showSubject()
     updateStatusFlg()
+    editDepartment()
     preview()
 
-    
+
 
     function showSubject() {
         $.ajax({
@@ -40,7 +41,7 @@ $(() => {
                                 </td>
                                 <td class="text-center">${btnStatus}</td>
                                 <td class="text-center">
-                                    <button data-bs-toggle="modal" data-bs-target="#mdlEditDepartment" id="btnEditDep" class="custom-btn btn-12" data-id="${data.ss_id}">
+                                    <button data-bs-toggle="modal" data-bs-target="#mdlEditSubject" id="btnEditSub" class="custom-btn btn-12" data-id="${data.ss_id}">
                                         <span>Edit</span><span><i class="fas fa-wrench fa-lg"></i></span>
                                     </button>
                                 </td>
@@ -267,42 +268,58 @@ $(() => {
     }
 
     function editDepartment() {
-        var depName;
+        var subName;
         var oldID, oldName;
 
-        $(document).on('click', '#btnEditDep', function () {
-            var depID = $(this).attr('data-id');
-            // console.log(depID);
+        $(document).on('click', '#btnEditSub', function () {
+            var subJectID = $(this).attr('data-id');
+            // console.log(subJectID);
             // return;
             $.ajax({
                 type: "GET",
-                url: "/department/getDepartmentByID", // Replace with your server endpoint to update the state
-                data: { sd_id: depID },
+                url: "/subject/getSubjectByID", // Replace with your server endpoint to update the state
+                data: { ss_id: subJectID },
                 dataType: 'json',
                 success: function (response) {
                     if (response.length == 1) {
                         const data = response[0];
                         var html = "";
-                        depName = data.sd_department_name;
+                        subName = data.ss_subject_name;
+                        var filePath = data.ss_document;
+                        var fileName = filePath.split('/').pop();
+
                         html += `
-                        <form id="formEditDepartment">
-                            <input type="hidden" id="sdID" value="${data.sd_id}">
+                        <form id="formEditSubject" enctype="multipart/form-data">
+                            <input type="hidden" id="sdID" value="${data.ss_id}">
                             <div class="row d-flex justify-content-between">
                                 <input type="hidden" id="mdlEditId" value="">
                                 <div class="col-md-12 mx-auto">
-                                    <label class="fs-4" for="">Department Name</label>
-                                    <input type="text" class="form-control" id="inpDepName" value="${data.sd_department_name}">
+                                    <label class="fs-4" for="inpEditSubject">Subject Name</label>
+                                    <input type="text" class="form-control" id="inpEditSubject" value="${data.ss_subject_name}">
+                                </div>
+                                <div class="col-md-12 mx-auto">
+                                    <label class="fs-4" for="inpEditMethod">Method</label>
+                                    <input type="text" class="form-control" id="inpEditMethod" value="${data.ss_method}">
+                                </div>
+                                <div class="col-md-12 mx-auto">
+                                    <label class="fs-4" for="inpEditDocument">Document</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="inpEditDocument >
+                                        <input type="text" class="form-control" id="inpEditDocumentShow" value="${fileName}" readonly>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mx-auto d-flex justify-content-evenly mt-3">
-                                    <a class="btn btn-outline-danger" data-bs-dismiss="modal" id="closeMdlEditDepartment">Cancle</a>
+                                    <a class="btn btn-outline-danger" data-bs-dismiss="modal" id="closeMdlEditSubject">Cancle</a>
                                     <button class="btn btn-success" id="btnSaveEdit">Save Change</button>
                                 </div>
                             </div>
                         </form>
                         `;
-                        $('#mdlFormEditDepartment').append(html);
-                        oldID = data.sd_id;
-                        oldName = data.sd_department_name;
+                        $('#mdlFormEditSubject').append(html);
+                        // oldID = data.sd_id;
+                        // oldName = data.sd_department_name;
+
+                        
                     }
 
                 },
@@ -311,6 +328,21 @@ $(() => {
                 }
             });
         })
+
+        $(document).on('input', '#inpEditDocument', function () {
+            // Check if a file is selected
+            if (this.files.length > 0) {
+                // Extract the file name from the path
+                var fileName = this.files[0].name;
+                console.log(fileName);
+        
+                // Update the value of inpEditDocumentShow
+                $('#inpEditDocumentShow').val(fileName);
+            } else {
+                // If no file is selected, clear the value of inpEditDocumentShow
+                $('#inpEditDocumentShow').val('');
+            }
+        });
 
         $(document).on('click', '#btnSaveEdit', function (event) {
             event.preventDefault();
@@ -416,13 +448,18 @@ $(() => {
 
         })
 
+        $('#mdlEditSubject').on('hidden.bs.modal', function () {
+            var closeEdt = $('#mdlFormEditSubject');
+            closeEdt.empty();
+        });
 
-        $(document).on('click', '#closeMdlEditDepartment', function () {
-            var closeEdt = $('#mdlFormEditDepartment');
+
+        $(document).on('click', '#closeMdlEditSubject', function () {
+            var closeEdt = $('#mdlFormEditSubject');
             closeEdt.empty();
         })
 
-        $('#mdlEditDepartment').on('shown.bs.modal', function () {
+        $('#mdlEditSubject').on('shown.bs.modal', function () {
             $(this).find('input').on('keydown', function (e) {
                 if (e.which === 13) {
                     e.preventDefault();
@@ -454,15 +491,15 @@ $(() => {
 
         $('#imageModal').on('hidden.bs.modal', function () {
             $(this).find('#imagePreview').attr('src', '');
-            console.log($(this).find('#imagePreview').attr('src'));
+            // console.log($(this).find('#imagePreview').attr('src'));
         });
 
-        $('#contentPreview').on('click', function() {
-            let picture = $(this).find('#imagePreview').attr('src');
-            console.log(picture);
+        $('#btn_newTap').on('click', function () {
+            let picture = $('#imageModal').find('#imagePreview').attr('src');
+            // console.log(picture);
             window.open(picture, '_blank');
             picture = ''
-            console.log(picture)
+            // console.log(picture)
         });
     }
 

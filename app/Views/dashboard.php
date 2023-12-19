@@ -115,7 +115,7 @@ if ($session->has('altLogin')) {
                 </div>
                 <div class="card-body">
                     <div class="video-content d-flex justify-content-center">
-                        <iframe class="border-pill" width="70%" height="530" src="https://www.youtube.com/embed/K7EivjQY0KE?si=libqYw_Qk0JqgSis" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe class="border-pill" width="70%" height="530" src=https://www.youtube.com/embed/K7EivjQY0KE?si=fBUXIxOqIiWWTmOv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="card-footer">

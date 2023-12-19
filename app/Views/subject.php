@@ -5,10 +5,10 @@
         <h1 class="h3 mb-2 text-gray-800">System Subject</h1>
     </div>
     <hr>
-    
+
     <div class="mx-auto" style="width: 90%;">
         <div class="d-flex justify-content-end iconHover">
-            <button class="btn btn-none border border-light-emphasis shadow-sm rounded" id="btnAdd" data-bs-toggle="modal" data-bs-target="#callMdlAdd">Add Department</button>
+            <button class="btn btn-none border border-light-emphasis shadow-sm rounded" id="btnAdd" data-bs-toggle="modal" data-bs-target="#callMdlAdd">Add Subject</button>
         </div>
     </div>
 
@@ -47,18 +47,18 @@
             </div>
             <div class="modal-body">
                 <!-- Form -->
-                <form id="formAddSubject">
+                <form id="formAddSubject" enctype="multipart/form-data">
                     <div class="mb-3 d-flex justify-content-between">
                         <label for="inpSubjectName" class="form-label col-3 fs-4">Subject Name</label>
                         <input type="text" class="form-control" id="inpSubjectName">
                     </div>
                     <div class="mb-3 d-flex justify-content-between">
                         <label for="inpMethod" class="form-label col-3 fs-4">Method</label>
-                        <input type="password" class="form-control" id="inpMethod">
+                        <input type="text" class="form-control" id="inpMethod">
                     </div>
                     <div class="mb-3 d-flex justify-content-between">
-                        <label for="selPermissionAdd" class="form-label col-3 fs-4">Document</label>
-                        <input type="file" class="form-control" id="selPermissionAdd"></input>
+                        <label for="document" class="form-label col-3 fs-4">Document</label>
+                        <input type="file" class="form-control" id="document"></input>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-danger mr-5" id="closeAddSubject" data-bs-dismiss="modal">Close</button>
@@ -71,12 +71,35 @@
     </div>
 </div>
 
-<!-- Edit Department Modal -->
+<!-- Image Modal -->
+<div class="modal" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="image-container" id="contentPreview">
+                    <img src="" alt="Image Preview" id="imagePreview" class="img-fluid">
+                    <div class="hover-text">Click to open new tap ...</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Subject Modal -->
 <div class="modal fade bg-dark" data-bs-keyboard="false" id="mdlEditDepartment" tabindex="-1" aria-labelledby="mdlEditDepartment" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-3 text-decoration-underline" style="color: #ffc40c;">Edit Department</h5>
+                <h5 class="modal-title fs-3 text-decoration-underline" style="color: #ffc40c;">Edit Subject</h5>
                 <button type="button" class="btn-close" id="closeMdlEditDepartment" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="mdlFormEditDepartment">
@@ -92,7 +115,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Status Flag (Department)</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Status Flag (Subject)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cancleUpdateFlg"></button>
             </div>
             <div class="modal-body">

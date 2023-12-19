@@ -5,6 +5,32 @@ body {
     font-family: 'Livvic', sans-serif !important;
 }
 
+.modal-body .image-container:hover img {
+    opacity: 1;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
+.modal-body .image-container {
+    cursor: pointer;
+    position: relative;
+}
+
+.modal-body .image-container .hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-size: 50px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-body .image-container:hover .hover-text {
+    opacity: 1;
+}
+
 .iconHover button:hover {
     background-color: #ad98ee !important;
     color: #fff !important;
@@ -30,6 +56,91 @@ body {
         7px 7px 20px 0px rgba(0, 0, 0, .1),
         4px 4px 5px 0px rgba(0, 0, 0, .1);
     outline: none;
+}
+
+/* 1 */
+.btn-1 {
+    background: #BC7AF9;
+    background: linear-gradient(0deg, rgba(#BC7AF9) 0%, rgba(#BC7AF9) 100%);
+    width: 60px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    color: #f0f0f0;
+    border: none;
+
+}
+
+.btn-1 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-1:before,
+.btn-1:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: #BC7AF9;
+    transition: all 0.3s ease;
+}
+
+.btn-1:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btn-1:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btn-1:hover {
+    background: transparent;
+    box-shadow: none;
+}
+
+.btn-1:hover:before {
+    height: 100%;
+}
+
+.btn-1:hover:after {
+    width: 100%;
+}
+
+.btn-1 span:hover {
+    color: #BC7AF9;
+}
+
+.btn-1 span:before,
+.btn-1 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: #BC7AF9;
+    transition: all 0.3s ease;
+}
+
+.btn-1 span:before {
+    width: 2px;
+    height: 0%;
+}
+
+.btn-1 span:after {
+    width: 0%;
+    height: 2px;
+}
+
+.btn-1 span:hover:before {
+    height: 100%;
+}
+
+.btn-1 span:hover:after {
+    width: 100%;
 }
 
 /* 5 */

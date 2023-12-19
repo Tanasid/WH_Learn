@@ -106,6 +106,10 @@ $routes->post('/department/updateDepartment', 'Department::updateDepartment',);
 
 // Subject //
 $routes->get('/subject', 'Subject::index', ['filter' => 'auth']);
+$routes->get('/subject/getSubject', 'Subject::getSubject',);
+$routes->get('/subject/getSubjectByStatus', 'Subject::getSubjectByStatus',);
+$routes->post('/subject/addSubject', 'Subject::addSubject',);
+$routes->post('/subject/updateStatusFlg', 'Subject::updateStatusFlg',);
 
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);

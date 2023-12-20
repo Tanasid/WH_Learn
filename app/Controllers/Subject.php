@@ -47,14 +47,13 @@ class Subject  extends Controller
         $subject_name = $this->request->getPost('inpName');
         $subject_method = $this->request->getPost('inpMethod');
         $subject_doc = $this->request->getFile('inpDocument');
-        
 
-    ////////////////////////  File Move  ///////////////////////////
-        if ($subject_doc->isValid() && ! $subject_doc->hasMoved())
-        {
+
+        ////////////////////////  File Move  ///////////////////////////
+        if ($subject_doc->isValid() && !$subject_doc->hasMoved()) {
             $subject_doc_name = $subject_doc->getRandomName();
             // $pathDocument = FCPATH . 'uploads/'. $subject_doc_name;
-            $pathDocument = 'uploads/'. $subject_doc_name;
+            $pathDocument = 'uploads/' . $subject_doc_name;
             $subject_doc->move('uploads/', $subject_doc_name);
         }
 
@@ -127,5 +126,63 @@ class Subject  extends Controller
         return $this->response->setJSON($data); // Return JSON response
     }
 
+    public function updateSubject()
+    {
+        $session = session();
 
+        // Assuming you have received data from the POST request
+        $ss_id = $this->request->getPost('ss_id');
+        $ss_subject_name = $this->request->getPost('ss_subject_name');
+        $ss_method = $this->request->getPost('ss_method');
+        $ss_document = $this->request->getPost('ss_document');
+        $subject_doc = $this->request->getFile('ss_document_new');
+        $ss_date = date('Y-m-d H:i:s');
+        $ss_by = $session->get('emp_code');
+
+        $db = \Config\Database::connect();
+        $checkName = $db->query("SELECT ss_subject_name FROM sys_subject WHERE ss_subject_name = '$ss_subject_name' AND ss_id <> $ss_id");
+        $ResultName = $checkName->getResultArray();
+
+        $checkMethod = $db->query("SELECT ss_method FROM sys_subject WHERE ss_method = '$ss_method' AND ss_id <> $ss_id");
+        $ResultMethod = $checkMethod->getResultArray();
+
+        $checkDoc = $db->query("SELECT ss_document FROM sys_subject WHERE ss_document = '$ss_document' ");
+        $ResultDoc = $checkDoc->getResultArray();
+
+
+        if (count($ResultName) >= 1) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Subject Name is already exist']);
+        } else if (count($ResultMethod) >= 1) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Method is already exist']);
+        } else if (count($ResultDoc) >= 1) {
+            // return $this->response->setJSON(['success' => false, 'message' => 'Hello Document OLD']);
+            $query = $db->query("UPDATE sys_subject
+            SET ss_subject_name = '$ss_subject_name', ss_method = '$ss_method', ss_updated_date = '$ss_date', ss_updated_by = '$ss_by' WHERE ss_id = $ss_id");
+
+            if ($query) {
+                return $this->response->setJSON(['success' => true, 'message' => 'Updated successfully']);
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => 'Failed to update subject']);
+            }
+        } else if (count($ResultDoc) == 0) {
+            // return $this->response->setJSON(['success' => false, 'message' => 'Hello Document New!!!']);
+
+            ////////////////////////  File Move  ///////////////////////////
+            if ($subject_doc->isValid() && !$subject_doc->hasMoved()) {
+                $subject_doc_name = $subject_doc->getRandomName();
+                // $pathDocument = FCPATH . 'uploads/'. $subject_doc_name;
+                $pathDocument = 'uploads/' . $subject_doc_name;
+                $subject_doc->move('uploads/', $subject_doc_name);
+            }
+
+            $query = $db->query("UPDATE sys_subject
+            SET ss_subject_name = '$ss_subject_name', ss_method = '$ss_method', ss_document = '$pathDocument', ss_updated_date = '$ss_date', ss_updated_by = '$ss_by' WHERE ss_id = $ss_id");
+
+            if ($query) {
+                return $this->response->setJSON(['success' => true, 'message' => 'Updated successfully']);
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => 'Failed to update subject']);
+            }
+        }
+    }
 }

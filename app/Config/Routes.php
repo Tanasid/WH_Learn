@@ -111,6 +111,11 @@ $routes->get('/subject/getSubjectByStatus', 'Subject::getSubjectByStatus',);
 $routes->post('/subject/addSubject', 'Subject::addSubject',);
 $routes->post('/subject/updateStatusFlg', 'Subject::updateStatusFlg',);
 $routes->get('/subject/getSubjectByID', 'Subject::getSubjectByID',);
+$routes->post('/subject/updateSubject', 'Subject::updateSubject',);
+
+// Info Subject //
+$routes->get('/infoSubject', 'InfoSubject::index', ['filter' => 'auth']);
+$routes->get('/infoSubject/getDepartment', 'InfoSubject::getDepartment',);
 
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);

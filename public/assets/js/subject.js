@@ -268,8 +268,8 @@ $(() => {
     }
 
     function editDepartment() {
-        var subName;
-        var oldID, oldName;
+        var subName, method, pathDoc;
+        var oldID, oldName, oldMethod, oldDoc;
 
         $(document).on('click', '#btnEditSub', function () {
             var subJectID = $(this).attr('data-id');
@@ -285,9 +285,11 @@ $(() => {
                         const data = response[0];
                         var html = "";
                         subName = data.ss_subject_name;
+                        method = data.ss_method;
                         var filePath = data.ss_document;
                         var fileName = filePath.split('/').pop();
-
+                        pathDoc = filePath;
+                        // console.log(pathDoc);
                         html += `
                         <form id="formEditSubject" enctype="multipart/form-data">
                             <input type="hidden" id="sdID" value="${data.ss_id}">
@@ -304,7 +306,7 @@ $(() => {
                                 <div class="col-md-12 mx-auto">
                                     <label class="fs-4" for="inpEditDocument">Document</label>
                                     <div class="input-group">
-                                        <input type="file" class="form-control" id="inpEditDocument >
+                                        <input type="file" class="form-control" id="inpEditDocument">
                                         <input type="text" class="form-control" id="inpEditDocumentShow" value="${fileName}" readonly>
                                     </div>
                                 </div>
@@ -316,10 +318,12 @@ $(() => {
                         </form>
                         `;
                         $('#mdlFormEditSubject').append(html);
-                        // oldID = data.sd_id;
-                        // oldName = data.sd_department_name;
-
-                        
+                        // console.log($('#inpEditDocument').val().split('\\').pop());
+                        oldID = data.ss_id;
+                        oldName = data.ss_subject_name;
+                        oldMethod = data.ss_method;
+                        oldDoc = fileName;
+                        // console.log(oldID+ ' '+oldName+' '+oldMethod+' '+oldDoc);
                     }
 
                 },
@@ -330,48 +334,108 @@ $(() => {
         })
 
         $(document).on('input', '#inpEditDocument', function () {
-            // Check if a file is selected
             if (this.files.length > 0) {
                 // Extract the file name from the path
                 var fileName = this.files[0].name;
-                console.log(fileName);
-        
-                // Update the value of inpEditDocumentShow
                 $('#inpEditDocumentShow').val(fileName);
+                // console.log($('#inpEditDocument').val().split('\\').pop());
             } else {
-                // If no file is selected, clear the value of inpEditDocumentShow
                 $('#inpEditDocumentShow').val('');
             }
         });
 
         $(document).on('click', '#btnSaveEdit', function (event) {
             event.preventDefault();
-            var controlDepName = depName;
-            var depId = $('#formEditDepartment #sdID').val();
-            var departmentName = $('#formEditDepartment #inpDepName').val().trim();
-            var checkPattern = departmentName;
+            var controlSubName = subName;
+            var controlMethod = method;
+            var subJectID = $('#formEditSubject #sdID').val();
+            var subjectName = $('#formEditSubject #inpEditSubject').val().trim();
+            var methodName = $('#formEditSubject #inpEditMethod').val().trim();
+            var docFile = $('#formEditSubject #inpEditDocumentShow').val().trim();
+            var docFileUpload = $('#formEditSubject #inpEditDocument')[0].files[0];
+            // console.log(subJectID+ ' '+subjectName+' '+methodName+' '+docFile);
             var thaiPattern = /[\u0E00-\u0E7F]/;
             const Pattern = /[!@#$%^&*(),.?":{}|<>]/;
+
             // console.log(permisId+" | "+permisName);
             // return;
-            if (thaiPattern.test(checkPattern)) {
+            if (thaiPattern.test(subjectName)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'Please do not enter Thai characters.',
                 });
-                $('#formEditDepartment #inpDepName').val(controlDepName);
+                $('#formEditSubject #inpEditSubject').val(controlSubName);
                 return;
             }
-            if (Pattern.test(checkPattern)) {
+            if (Pattern.test(subjectName)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'Please do not enter Special characters.',
                 });
-                $('#formEditDepartment #inpDepName').val(controlDepName);
+                $('#formEditSubject #inpEditSubject').val(controlSubName);
                 return;
             }
+
+            if (thaiPattern.test(methodName)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please do not enter Thai characters.',
+                });
+                $('#formEditSubject #inpEditMethod').val(controlMethod);
+                return;
+            }
+            if (Pattern.test(methodName)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please do not enter Special characters.',
+                });
+                $('#formEditSubject #inpEditMethod').val(controlMethod);
+                return;
+            }
+
+            if (subJectID === oldID && subjectName === oldName && methodName === oldMethod && docFile === oldDoc) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'The data has not been edited.',
+                });
+                $('#mdlFormEditSubject').empty();
+                $('#mdlEditSubject').modal('hide');
+                return;
+            }
+            if (subjectName === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Subject Name is required',
+                });
+                $('#formEditSubject #inpEditSubject').val(controlSubName);
+                return;
+            }
+            if (methodName === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Method is required',
+                });
+                $('#formEditSubject #inpEditMethod').val(controlMethod);
+                return;
+            }
+            if ($('#formEditSubject #inpEditDocument').val() == '') {
+                docFile = pathDoc;
+            }
+
+            var formData = new FormData();
+            formData.append('ss_id', subJectID);
+            formData.append('ss_subject_name', subjectName);
+            formData.append('ss_method', methodName);
+            formData.append('ss_document', docFile);
+            formData.append('ss_document_new', docFileUpload);
+
             Swal.fire({
                 title: 'Confirm Save Changes',
                 text: 'Are you sure you want to save the changes?',
@@ -381,34 +445,15 @@ $(() => {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, save it!'
             }).then((result) => {
-                if (depId === oldID && departmentName === oldName) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Warning',
-                        text: 'The data has not been edited.',
-                    });
-                    $('#mdlFormEditDepartment').empty();
-                    $('#mdlEditDepartment').modal('hide');
-                    return;
-                }
-                if (departmentName === '') {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Department Name is required',
-                    });
-                    $('#formEditDepartment #inpDepName').val(controlDepName);
-                    return;
-                }
                 if (result.isConfirmed) {
+                    // console.log(docFile);
+                    // return;
                     $.ajax({
                         type: 'POST',
-                        url: '/department/updateDepartment', // Change the URL to your updateData endpoint
-                        data: {
-                            sd_id: depId,
-                            sd_departname_name: departmentName
-                            // ... other fields you want to update
-                        },
+                        url: '/subject/updateSubject', // Change the URL to your updateData endpoint
+                        data: formData,
+                        contentType: false,
+                        processData: false,
                         dataType: 'json',
                         success: function (response) {
                             // console.log(response);
@@ -418,14 +463,14 @@ $(() => {
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success',
-                                    text: 'User data updated successfully!',
+                                    text: 'Data updated successfully!',
                                     timer: 2500, // Set the timer for auto-closing alert
                                     showConfirmButton: true
                                 }).then(function () {
-                                    $('#mdlEditDepartment').modal('hide');
-                                    var closeEdt = $('#mdlFormEditDepartment');
+                                    $('#mdlEditSubject').modal('hide');
+                                    var closeEdt = $('#mdlFormEditSubject');
                                     closeEdt.empty();
-                                    showDepartment();
+                                    showSubject();
                                 });
                             } else {
                                 // Show an error message using SweetAlert2
@@ -434,7 +479,6 @@ $(() => {
                                     title: 'Error',
                                     text: response.message,
                                 });
-                                $('#formEditDepartment #inpDepName').val(controlDepName);
                             }
                         },
                         error: function (error) {

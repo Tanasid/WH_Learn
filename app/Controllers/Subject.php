@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\SubjectModel;
 use CodeIgniter\Controller;
 
-class Subject  extends Controller
+class Subject extends Controller
 {
     public function index()
     {

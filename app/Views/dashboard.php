@@ -94,7 +94,7 @@ if ($session->has('altLogin')) {
     <div class="row">
         <div class="col-8 mx-auto">
             <!-- Area Chart -->
-            <div class="card shadow mb-4">
+            <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Videos</h6>
                 </div>
@@ -107,9 +107,9 @@ if ($session->has('altLogin')) {
                     Styling for the area chart can be found in the
                     <code>Are you ready for learning ??</code>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="card shadow mb-4">
+            <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Videos</h6>
                 </div>
@@ -122,7 +122,7 @@ if ($session->has('altLogin')) {
                     Styling for the area chart can be found in the
                     <code>Are you ready for learning ??</code>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

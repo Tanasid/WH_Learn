@@ -116,6 +116,13 @@ $routes->post('/subject/updateSubject', 'Subject::updateSubject',);
 // Info Subject //
 $routes->get('/infoSubject', 'InfoSubject::index', ['filter' => 'auth']);
 $routes->get('/infoSubject/getDepartment', 'InfoSubject::getDepartment',);
+$routes->get('/infoSubject/getSubject', 'InfoSubject::getSubject',);
+$routes->get('/infoSubject/getDepById', 'InfoSubject::getDepById',);
+$routes->post('/infoSubject/updateStatusFlg', 'InfoSubject::updateStatusFlg',);
+
+// Explanner //
+$routes->get('/explanner', 'Explanner::index', ['filter' => 'auth']);
+$routes->get('/explanner/getDocument', 'Explanner::getDocument',);
 
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);

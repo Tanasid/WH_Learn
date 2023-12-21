@@ -19,25 +19,24 @@
                 <select type="text" class="form-select" id="selSubject">
                 <option value="">Please Select Subject ...</option>
                 </select>
-                <button class="btn btn-none border border-light-emphasis shadow-sm rounded ml-3" id="btnSaveAddPer">Add</button>
+                <button class="btn btn-none border border-light-emphasis shadow-sm rounded ml-3" id="btnAdd">Add</button>
             </div>
         </div>
     </div>
 
     <div class="card mt-5 mx-auto" id="form_table" style="display:none; width: 90%;">
         <div class="card-header text-primary fs-5 fw-bold text-decoration-underline bg-white">
-            Permission Group List
+            Info Subject List
         </div>
 
         <div class="card-body">
-            <table class="table table-striped table-hover align-self-center w-100" id="tblPermis">
+            <table class="table table-striped table-hover align-self-center w-100" id="tblSubject">
                 <thead class="table-light"">
                     <th class=" text-center text-dark" style="--bs-text-opacity: .8;">No.</th>
-                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Sub Menu</th>
-                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Menu Controller</th>
+                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Department Name</th>
+                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Subject</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Status</th>
-                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Last Update date</th>
-                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Last Update By</th>
+                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Action</th>
                 </thead>
                 <tbody id="tbody" class="">
 
@@ -53,15 +52,31 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Status Flag (Main Menu)</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Status (Info Subject)</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cancleUpdateFlg"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to update the status flag?
+                Are you sure you want to update the status ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancleUpdateFlg">Cancel</button>
                 <button type="button" class="btn btn-primary" id="confirmUpdate">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Info Subject Modal -->
+<div class="modal fade" data-bs-keyboard="false" id="mdlEditInfoSubject" tabindex="-1" aria-labelledby="mdlEditInfoSubject" aria-hidden="true" data-bs-backdrop="none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-3 text-decoration-underline" style="color: #ffc40c;">Edit Info Subject</h5>
+                <button type="button" class="btn-close" id="closeMdlEditSubject" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="mdlFormEditInfoSubject">
+                <!-- Form -->
+
             </div>
         </div>
     </div>

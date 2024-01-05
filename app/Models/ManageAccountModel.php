@@ -7,7 +7,7 @@ class ManageAccountModel extends Model {
 
     protected $primaryKey = 'su_id'; // Primary key of your table
 
-    protected $allowedFields = ['su_emp_code', 'su_emp_password', 'spg_id', 'su_firstname', 'su_lastname', 'su_email', 'mpc_id', 'su_status_flg', 'su_created_date', 'su_created_by','su_updated_date', 'su_updated_by'];
+    protected $allowedFields = ['su_emp_code', 'su_emp_password', 'spg_id', 'sd_id','su_firstname', 'su_lastname', 'su_email', 'mpc_id', 'su_status_flg', 'su_created_date', 'su_created_by','su_updated_date', 'su_updated_by'];
 
     // Add more fields as needed
 
@@ -23,6 +23,7 @@ class ManageAccountModel extends Model {
             'su_emp_code' => $newData['su_emp_code'],
             'su_emp_password' => $newData['su_emp_password'],
             'spg_id' => $newData['spg_id'],
+            'sd_id' => $newData['sd_id'],
             'su_firstname' => $newData['su_firstname'],
             'su_lastname' => $newData['su_lastname'],
             'su_email' => $newData['su_email'],

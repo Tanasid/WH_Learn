@@ -14,10 +14,9 @@
 
     <div class="row d-flex justify-content-between mt-3">
         <div class="col-md-12 mx-auto">
-            <div class="d-flex iconHover">
+            <div class="d-flex">
                 <label class="fs-4 mr-3" for="">Document</label>
-                <input type="text" class="form-control mr-md-5 col-md-6" id="inpDocument" value="" placeholder="Document this here .." readonly>
-                <a href="#" id="downloadLink" style="display: none;" download>Download</a>
+                <a href="" id="downloadLink" class="css-button-sliding-to-bottom--green" download><span></span>Download </a>
             </div>
         </div>
     </div>
@@ -32,13 +31,13 @@
                     <div class="video-content d-flex justify-content-center">
                         <iframe class="border-pill embed-responsive-ite" width="90%" height="600" src="" id="videoContent" frameborder="0" allowfullscreen></iframe>
                     </div>
-                  
+
                 </div>
                 <div class="card-footer">
                     Styling for the area chart can be found in the
                     <code>Are you ready for learning ??</code>
                 </div>
-                
+
             </div>
         </div>
     </div>

@@ -3,7 +3,8 @@
     <div class="row d-flex justify-content-between my-3">
         <div class="col-md-12 mx-auto">
             <label class="h3 mb-2 text-gray-800" for="">Info Subject</label>
-            <div class="d-flex">
+            <div class="d-flex mt-3">
+                <label class="fs-4 mr-3" for="selSubject">Department</label>
                 <select type="text" class="form-select mr-md-5 col-md-6" id="selDepartment"></select>
                 <button class="btn btn-primary px-4 rounded" id="btnSearch">Search</button>
                 <!-- <button class="btn btn-warning px-4 rounded ml-5" id="" data-bs-toggle="modal" data-bs-target="#mdlEditPermisGroup">Edit</button> -->
@@ -14,10 +15,10 @@
 
     <div class="row d-flex justify-content-between">
         <div class="col-md-6" style="display:none;" id="search_box">
-            <label class="fs-4" for="selSubject">Subject</label>
             <div class="d-flex iconHover"">
+                <label class="fs-4 mr-3" for="selSubject">Subject</label>
                 <select type="text" class="form-select" id="selSubject">
-                <option value="">Please Select Subject ...</option>
+                    <option value="">Please Select Subject ...</option>
                 </select>
                 <button class="btn btn-none border border-light-emphasis shadow-sm rounded ml-3" id="btnAdd">Add</button>
             </div>
@@ -36,7 +37,6 @@
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Department Name</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Subject</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Status</th>
-                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Action</th>
                 </thead>
                 <tbody id="tbody" class="">
 

@@ -85,9 +85,9 @@ class Login extends Controller
 
                 $db = \Config\Database::connect();
                 $logActId = $db->query("SELECT * FROM log_active WHERE su_id = '{$ses_data['user_id']}' AND la_logout = '0000-00-00 00:00:00' ORDER BY la_id DESC ");
-                $resutLogId = $logActId->getResultArray();
-                if (count($resutLogId) >= 1) {
-                    $Login_id = $resutLogId[0]['la_id'];
+                $resultLogId = $logActId->getResultArray();
+                if (count($resultLogId) >= 1) {
+                    $Login_id = $resultLogId[0]['la_id'];
                     $session->set('Login_id', $Login_id);
                 }
 

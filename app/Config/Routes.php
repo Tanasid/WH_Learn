@@ -47,6 +47,7 @@ $routes->get('/manageAccount', 'ManageAccount::index', ['filter' => 'auth']);
 $routes->get('/manageAccount/showAccount', 'ManageAccount::showAccount',);
 $routes->post('/manageAccount/updateStatusFlag', 'ManageAccount::updateStatusFlag',);
 $routes->get('/manageAccount/getPermissionGroups', 'ManageAccount::getPermissionGroups',);
+$routes->get('/manageAccount/getDepartment', 'ManageAccount::getDepartment',);
 $routes->get('/manageAccount/getPlant', 'ManageAccount::getPlant',);
 $routes->get('/manageAccount/getDataEdit', 'ManageAccount::getDataEdit',);
 $routes->post('/manageAccount/addAccount', 'ManageAccount::addAccount',);

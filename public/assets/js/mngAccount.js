@@ -30,7 +30,8 @@ $(() => {
                                 <td class="text-center">${i + 1}</td>
                                 <td class="text-center">${data.su_emp_code}</td>
                                 <td class="text-center">${data.spg_name}</td>
-                                <td class="text-center">${data.su_firstname}</td>
+                                <td class="text-center">${data.sd_department_name}</td>
+                                <td class="text-center">${data.su_firstname} ${data.su_lastname}</td>
                                 <td class="text-center">${data.su_email}</td>
                                 <td class="text-center">${btnStatus}</td>
                                 <td class="text-center">
@@ -157,6 +158,38 @@ $(() => {
             });
 
             $.ajax({
+                url: '/ManageAccount/getDepartment',
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+
+                    var selectDept = $('#selDeptAdd');
+
+                    // Clear any existing options
+                    selectDept.empty();
+
+                    // Add new options based on the response data
+                    var option1 = $('<option>', {
+                        value: '',  // Adjust the property name based on your data
+                        text: 'Please Select Department ...'
+                    })
+                    selectDept.append(option1);
+
+                    for (var i = 0; i < response.length; i++) {
+                        var option = $('<option>', {
+                            value: response[i].sd_id,  // Adjust the property name based on your data
+                            text: response[i].sd_department_name  // Adjust the property name based on your data
+                        });
+                        selectDept.append(option);
+                    }
+                    // console.log(select);
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+
+            $.ajax({
                 url: '/ManageAccount/getPlant',
                 method: 'GET',
                 dataType: 'json',
@@ -196,11 +229,12 @@ $(() => {
             var lastName = $('#inpLastName').val().trim();
             var email = $('#inpEmail').val().trim();
             var permissionGroup = $('#selPermissionAdd').val().trim();
+            var Department = $('#selDeptAdd').val().trim();
             var plant = $('#selPlantAdd').val().trim();
 
             var fieldIds = [
                 empCode, empPassword, firstName, lastName,
-                email, permissionGroup, plant
+                email, permissionGroup, Department, plant
             ];
             const checkPattern = fieldIds;
             const thaiWord = /[\u0E00-\u0E7F]/;
@@ -285,7 +319,14 @@ $(() => {
                     title: 'Error',
                     text: 'Permission Group is required',
                 });
-                $('#inpEmpCode').focus();
+                return;
+            }
+            if (Department == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Department is required',
+                });
                 return;
             }
             if (plant == "") {
@@ -294,7 +335,6 @@ $(() => {
                     title: 'Error',
                     text: 'Plant is required',
                 });
-                $('#inpEmpCode').focus();
                 return;
             }
 
@@ -318,6 +358,7 @@ $(() => {
                             lastName: lastName,
                             email: email,
                             permissionGroup: permissionGroup,
+                            Department: Department,
                             plant: plant
                         },
                         dataType: 'json',
@@ -379,7 +420,7 @@ $(() => {
 
     function mdlEditAccount() {
 
-        var oldEmp, oldPermis, oldFname, oldLname, oldEmail, oldPlant, oldPass;
+        var oldEmp, oldPermis, oldDept, oldFname, oldLname, oldEmail, oldPlant, oldPass;
         $(document).on('click', '#btnEditAcc', function () {
 
             var userId = $(this).attr('data-id');
@@ -395,7 +436,7 @@ $(() => {
                         var html = "";
                         for (let i = 0; i < response.length; i++) {
                             const data = response[i];
-
+                            // console.log(data);
                             html += `
                             <form id="formEditAcc">
                                 <input type="hidden" id="su_id" value="${data.su_id}">
@@ -411,6 +452,12 @@ $(() => {
                                     <label for="selPermissionAdd" class="form-label col-3 fs-4">Permission Group</label>
                                     <select class="form-select" id="selPermissionAdd" require>
                                         ${populatePermisIdOptions(data.spg_id)}
+                                    </select>
+                                </div>
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <label for="selDeptAdd" class="form-label col-3 fs-4">Department</label>
+                                    <select class="form-select" id="selDeptAdd" require>
+                                        ${populateDeptIdOptions(data.sd_id)}
                                     </select>
                                 </div>
                                 <div class="mb-3 d-flex justify-content-between">
@@ -441,6 +488,7 @@ $(() => {
                             $('#mdlFormEdit').append(html);
                             oldEmp = data.su_emp_code;
                             oldPermis = data.spg_id;
+                            oldDept = data.sd_id;
                             oldFname = data.su_firstname;
                             oldLname = data.su_lastname;
                             oldEmail = data.su_email;
@@ -464,6 +512,7 @@ $(() => {
             var suEmpCode = $('#formEditAcc #inpEmpCode').val().trim();
             var suEmpPassword = $('#formEditAcc #inpEmpPassword').val().trim();
             var spgId = $('#formEditAcc #selPermissionAdd').val().trim();
+            var deptId = $('#formEditAcc #selDeptAdd').val().trim();
             var suFirstName = $('#formEditAcc #inpFirstName').val().trim();
             var suLastName = $('#formEditAcc #inpLastName').val().trim();
             var suStatusFlg = $('#formEditAcc #inpStatusFlg').val().trim();
@@ -474,7 +523,7 @@ $(() => {
                 suEmpPassword = oldPass;
             }
 
-            if (suEmpCode === oldEmp && suEmpPassword === oldPass && suFirstName === oldFname && suLastName === oldLname && suEmail === oldEmail && mpcId === oldPlant && spgId === oldPermis) {
+            if (suEmpCode === oldEmp && suEmpPassword === oldPass && suFirstName === oldFname && suLastName === oldLname && suEmail === oldEmail && mpcId === oldPlant && spgId === oldPermis && oldDept === deptId) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Warning',
@@ -485,7 +534,7 @@ $(() => {
 
             var fieldIds = [
                 suId, suEmpCode, spgId,
-                suFirstName, suLastName, suEmail, mpcId
+                suFirstName, suLastName, suEmail, mpcId, deptId
             ];
             const checkPattern = fieldIds;
             const thaiPattern = /[\u0E00-\u0E7F]/;
@@ -546,7 +595,8 @@ $(() => {
                             su_lastname: suLastName,
                             su_status_flg: suStatusFlg,
                             su_email: suEmail,
-                            mpc_id: mpcId
+                            mpc_id: mpcId,
+                            sd_id: deptId
                             // ... other fields you want to update
                         },
                         dataType: 'json',
@@ -724,6 +774,31 @@ $(() => {
 
         return optionsHTML; // Return the generated options HTML
     }
+
+    function populateDeptIdOptions(selectedDeptId) {
+        let optionsHTML = ''; // Initialize the options HTML
+
+        // AJAX call to fetch plant data
+        $.ajax({
+            url: '/ManageAccount/getDepartment',
+            method: 'GET',
+            dataType: 'json',
+            async: false, // Wait for the response before continuing
+            success: function (response) {
+                for (let i = 0; i < response.length; i++) {
+                    const dept = response[i];
+                    const isSelected = dept.sd_id === selectedDeptId ? 'selected' : '';
+                    optionsHTML += `<option value="${dept.sd_id}" ${isSelected}>${dept.sd_department_name}</option>`;
+                }
+            },
+            error: function (error) {
+                console.log('Error:', error);
+            }
+        });
+
+        return optionsHTML; // Return the generated options HTML
+    }
+
     function isValidEmail(email) {
         // Use a regular expression to validate email format
         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

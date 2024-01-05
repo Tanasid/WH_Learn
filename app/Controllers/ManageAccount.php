@@ -29,9 +29,10 @@ class ManageAccount extends Controller
 
         $emp_code = $session->get('emp_code');
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT su.*, pg.spg_name 
+        $query = $db->query("SELECT su.*, pg.spg_name, sd.sd_department_name 
         from sys_user su
         LEFT JOIN sys_permission_group pg ON su.spg_id = pg.spg_id
+        LEFT JOIN sys_department sd ON sd.sd_id = su.sd_id
         WHERE su_emp_code != '$emp_code' ");
 
         $data = $query->getResultArray(); // Fetch results as an array
@@ -83,6 +84,16 @@ class ManageAccount extends Controller
         return $this->response->setJSON($data); // Return JSON response
     }
 
+    public function getDepartment()
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT sd_id, sd_department_name, sd_status_flg FROM sys_department WHERE sd_status_flg = 1");
+
+        $data = $query->getResultArray(); // Fetch results as an array
+
+        return $this->response->setJSON($data); // Return JSON response
+    }
+
     public function getPlant()
     {
         $db = \Config\Database::connect();
@@ -98,7 +109,7 @@ class ManageAccount extends Controller
         $userID = $this->request->getVar('userID');
 
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT ssu.su_id, ssu.su_emp_code, ssu.spg_id, pg.spg_name, ssu.su_emp_password, ssu.su_firstname, ssu.su_lastname, ssu.su_status_flg, ssu.su_email, mt.mpc_name, ssu.mpc_id
+        $query = $db->query("SELECT ssu.su_id, ssu.su_emp_code, ssu.spg_id, pg.spg_name, ssu.sd_id, ssu.su_emp_password, ssu.su_firstname, ssu.su_lastname, ssu.su_status_flg, ssu.su_email, mt.mpc_name, ssu.mpc_id
         FROM sys_user ssu
         LEFT JOIN sys_permission_group pg ON ssu.spg_id = pg.spg_id
         LEFT JOIN mst_plant_code mt on  ssu.mpc_id = mt.mpc_id
@@ -116,6 +127,7 @@ class ManageAccount extends Controller
         $su_emp_code = $this->request->getPost('empCode');
         $su_emp_password = $this->request->getPost('empPassword');
         $spg_id = $this->request->getPost('permissionGroup');
+        $sd_id = $this->request->getPost('Department');
         $su_firstname = $this->request->getPost('firstName');
         $su_lastname = $this->request->getPost('lastName');
         $su_email = $this->request->getPost('email');
@@ -134,8 +146,8 @@ class ManageAccount extends Controller
             already exist']);
         }
 
-        $query = $db->query("INSERT INTO sys_user (su_emp_code, su_emp_password, spg_id, su_firstname,  su_lastname, su_email, mpc_id, su_status_flg, su_created_date, su_created_by, su_updated_date, su_updated_by)
-        VALUES ('$su_emp_code', '$mdPass', '$spg_id', '$su_firstname', '$su_lastname', '$su_email', '$mpc_id', 1, '$su_date', '$su_by', '$su_date', '$su_by')");
+        $query = $db->query("INSERT INTO sys_user (su_emp_code, su_emp_password, spg_id, sd_id, su_firstname,  su_lastname, su_email, mpc_id, su_status_flg, su_created_date, su_created_by, su_updated_date, su_updated_by)
+        VALUES ('$su_emp_code', '$mdPass', '$spg_id', '$sd_id', '$su_firstname', '$su_lastname', '$su_email', '$mpc_id', 1, '$su_date', '$su_by', '$su_date', '$su_by')");
 
         if ($query) {
             return $this->response->setJSON(['success' => true, 'message' => 'Add Account successfully']);
@@ -170,6 +182,7 @@ class ManageAccount extends Controller
             'su_emp_code' => $su_emp_code,
             'su_emp_password' => $mdPass,
             'spg_id' => $this->request->getPost('spg_id'),
+            'sd_id' => $this->request->getPost('sd_id'),
             'su_firstname' => $this->request->getPost('su_firstname'),
             'su_lastname' => $this->request->getPost('su_lastname'),
             'su_status_flg' => $this->request->getPost('su_status_flg'),

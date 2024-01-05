@@ -18,6 +18,7 @@
                         <th class="text-center text-dark" style="--bs-text-opacity: .8;">No.</th>
                         <th class="text-center text-dark" style="--bs-text-opacity: .8;">Emp Code</th>
                         <th class="text-center text-dark" style="--bs-text-opacity: .8;">Group</th>
+                        <th class="text-center text-dark" style="--bs-text-opacity: .8;">Department</th>
                         <th class="text-center text-dark" style="--bs-text-opacity: .8;">Name</th>
                         <th class="text-center text-dark" style="--bs-text-opacity: .8;">Email</th>
                         <th class="text-center text-dark" style="--bs-text-opacity: .8;">Status</th>
@@ -55,6 +56,10 @@
                     <div class="mb-3 d-flex justify-content-between">
                         <label for="selPermissionAdd" class="form-label col-3 fs-4">Permission Group</label>
                         <select class="form-select" id="selPermissionAdd"></select>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="selDeptAdd" class="form-label col-3 fs-4">Department</label>
+                        <select class="form-select" id="selDeptAdd"></select>
                     </div>
                     <div class="mb-3 d-flex justify-content-between">
                         <label for="inpFirstName" class="form-label col-3 fs-4">First Name</label>

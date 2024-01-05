@@ -104,11 +104,6 @@ $(() => {
                                 <td class="text-center">${data.sd_department_name}</td>
                                 <td class="text-center">${data.ss_subject_name}</td>
                                 <td class="text-center">${btnStatus}</td>
-                                <td class="text-center">
-                                    <button data-bs-toggle="modal" data-bs-target="#mdlEditInfoSubject" id="btnEditInfoSub" class="custom-btn btn-12" data-id="${data.iss_id}">
-                                        <span>Edit</span><span><i class="fas fa-wrench fa-lg"></i></span>
-                                    </button>
-                                </td>
                             </tr>`;
                         $('#tblSubject').dataTable().fnDestroy()
                         $("#tbody")

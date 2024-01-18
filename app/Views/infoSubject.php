@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid">   
 
     <div class="row d-flex justify-content-between my-3">
         <div class="col-md-12 mx-auto">
@@ -16,7 +16,7 @@
     <div class="row d-flex justify-content-between">
         <div class="col-md-6" style="display:none;" id="search_box">
             <div class="d-flex iconHover"">
-                <label class="fs-4 mr-3" for="selSubject">Subject</label>
+                <label class=" fs-4 mr-3" for="selSubject">Subject</label>
                 <select type="text" class="form-select" id="selSubject">
                     <option value="">Please Select Subject ...</option>
                 </select>

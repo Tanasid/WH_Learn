@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/assets/css/mngMenu.css" rel="stylesheet">
+    <link href="/assets/css/progressChart.css" rel="stylesheet">
     <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- <link src="/assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"></link> -->
     <link src="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">

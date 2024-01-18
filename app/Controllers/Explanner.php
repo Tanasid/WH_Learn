@@ -13,6 +13,7 @@ class Explanner extends Controller
             "content" => $content,
             "anotherJS" => $anotherJS,
         ];
+        // $anotherJS
         $page = view('start', $data);
         return $this->response->setContentType('text/html')->setBody($page);
     }

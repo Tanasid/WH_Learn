@@ -37,6 +37,9 @@ $(() => {
                                 <td class="text-center">${data.ss_subject_name}</td>
                                 <td class="text-center">${data.ss_method}</td>
                                 <td class="text-center">
+                                    <button data-toggle="modal" data-target="#imageModal" id="btn_Image" data-id="${data.ss_link}" class="custom-btn btn-1 mr-3"><span><i class="fas fa-search fa-lg"></i></span></button>
+                                </td>
+                                <td class="text-center">
                                     <button data-toggle="modal" data-target="#imageModal" id="btn_Image" data-id="${data.ss_document}" class="custom-btn btn-1 mr-3"><span><i class="fas fa-search fa-lg"></i></span></button>
                                 </td>
                                 <td class="text-center">${btnStatus}</td>
@@ -286,9 +289,12 @@ $(() => {
                         var html = "";
                         subName = data.ss_subject_name;
                         method = data.ss_method;
-                        var filePath = data.ss_document;
-                        var fileName = filePath.split('/').pop();
-                        pathDoc = filePath;
+                        var DocPath = data.ss_document;
+                        var docName = DocPath.split('/').pop();
+                        var linkPath = data.ss_link;
+                        var linkName = linkPath.split('/').pop();
+                        pathDoc = DocPath;
+                        pathLink = linkPath;
                         // console.log(pathDoc);
                         html += `
                         <form id="formEditSubject" enctype="multipart/form-data">
@@ -304,10 +310,17 @@ $(() => {
                                     <input type="text" class="form-control" id="inpEditMethod" value="${data.ss_method}">
                                 </div>
                                 <div class="col-md-12 mx-auto">
+                                    <label class="fs-4" for="inpEditLink">Link</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="inpEditLink">
+                                        <input type="text" class="form-control" id="inpEditLinkShow" value="${linkName}" disabled readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mx-auto">
                                     <label class="fs-4" for="inpEditDocument">Document</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control" id="inpEditDocument">
-                                        <input type="text" class="form-control" id="inpEditDocumentShow" value="${fileName}" readonly>
+                                        <input type="text" class="form-control" id="inpEditDocumentShow" value="${docName}" disabled readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mx-auto d-flex justify-content-evenly mt-3">
@@ -322,7 +335,8 @@ $(() => {
                         oldID = data.ss_id;
                         oldName = data.ss_subject_name;
                         oldMethod = data.ss_method;
-                        oldDoc = fileName;
+                        oldDoc = docName;
+                        oldLink = linkName;
                         // console.log(oldID+ ' '+oldName+' '+oldMethod+' '+oldDoc);
                     }
 
@@ -336,11 +350,22 @@ $(() => {
         $(document).on('input', '#inpEditDocument', function () {
             if (this.files.length > 0) {
                 // Extract the file name from the path
-                var fileName = this.files[0].name;
+                let fileName = this.files[0].name;
                 $('#inpEditDocumentShow').val(fileName);
                 // console.log($('#inpEditDocument').val().split('\\').pop());
             } else {
                 $('#inpEditDocumentShow').val('');
+            }
+        });
+
+        $(document).on('input', '#inpEditLink', function () {
+            if (this.files.length > 0) {
+                // Extract the file name from the path
+                let fileName = this.files[0].name;
+                $('#inpEditLinkShow').val(fileName);
+                // console.log($('#inpEditDocument').val().split('\\').pop());
+            } else {
+                $('#inpEditLinkShow').val('');
             }
         });
 
@@ -353,11 +378,13 @@ $(() => {
             var methodName = $('#formEditSubject #inpEditMethod').val().trim();
             var docFile = $('#formEditSubject #inpEditDocumentShow').val().trim();
             var docFileUpload = $('#formEditSubject #inpEditDocument')[0].files[0];
+            var linkFile = $('#formEditSubject #inpEditLinkShow').val().trim();
+            var linkFileUpload = $('#formEditSubject #inpEditLink')[0].files[0];
             // console.log(subJectID+ ' '+subjectName+' '+methodName+' '+docFile);
             var thaiPattern = /[\u0E00-\u0E7F]/;
             const Pattern = /[!@#$%^&*(),.?":{}|<>]/;
 
-            // console.log(permisId+" | "+permisName);
+            // console.log(docFile+" | "+linkFile);
             // return;
             if (thaiPattern.test(subjectName)) {
                 Swal.fire({
@@ -397,7 +424,7 @@ $(() => {
                 return;
             }
 
-            if (subJectID === oldID && subjectName === oldName && methodName === oldMethod && docFile === oldDoc) {
+            if (subJectID === oldID && subjectName === oldName && methodName === oldMethod && docFile === oldDoc && oldLink === linkFile) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Warning',
@@ -428,6 +455,9 @@ $(() => {
             if ($('#formEditSubject #inpEditDocument').val() == '') {
                 docFile = pathDoc;
             }
+            if ($('#formEditSubject #inpEditLink').val() == '') {
+                linkFile = pathLink;
+            }
 
             var formData = new FormData();
             formData.append('ss_id', subJectID);
@@ -435,6 +465,8 @@ $(() => {
             formData.append('ss_method', methodName);
             formData.append('ss_document', docFile);
             formData.append('ss_document_new', docFileUpload);
+            formData.append('ss_link', linkFile);
+            formData.append('ss_link_new', linkFileUpload);
 
             Swal.fire({
                 title: 'Confirm Save Changes',

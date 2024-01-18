@@ -37,6 +37,10 @@ body {
     opacity: 1;
 } */
 
+#inpLink:hover {
+    cursor: pointer;
+}
+
 .iconHover button:hover {
     background-color: #ad98ee !important;
     color: #fff !important;
@@ -413,38 +417,37 @@ body {
     /* ปรับค่านี้ให้เท่ากับความสูงของ topbar */
 }
 
-.css-button-sliding-to-bottom--green {
-    min-width: 130px;
-    height: 40px;
+a.my-button{
+    background: linear-gradient(to right,#4693ed ,#4990c5);
+    background-color: #4693ed;
     color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
-    z-index: 0;
-    background: #fff;
-    overflow: hidden;
-    border: 2px solid #57cc99;
-    color: #57cc99;
-  }
-  .css-button-sliding-to-bottom--green:hover {
-    color: #fff;
-  }
-  .css-button-sliding-to-bottom--green:hover:after {
-    height: 100%;
-  }
-  .css-button-sliding-to-bottom--green:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    transition: all 0.3s ease;
-    left: 0;
-    top: 0;
-    height: 0;
-    width: 100%;
-    background: #57cc99;
-  }
+    font-size: 18px;
+    font-weight: 550;
+    font-style: normal;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 0px solid #000;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px 0px #2D2D2D;
+   }
+   a.my-button span{
+    margin-right: 5px;
+    display: block;
+    width: 28px;
+    height: 28px;
+    background-image: url(data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KDTxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIi8+Cg08ZyBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KDTxnIGlkPSJTVkdSZXBvX2ljb25DYXJyaWVyIj4gPHBhdGggZD0iTTEzLjUgM0gxMkg4QzYuMzQzMTUgMyA1IDQuMzQzMTUgNSA2VjE4QzUgMTkuNjU2OSA2LjM0MzE1IDIxIDggMjFIMTJNMTMuNSAzTDE5IDguNjI1TTEzLjUgM1Y3LjYyNUMxMy41IDguMTc3MjggMTMuOTQ3NyA4LjYyNSAxNC41IDguNjI1SDE5TTE5IDguNjI1VjExLjgxMjUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4gPHBhdGggZD0iTTE3LjUgMTVWMjFNMTcuNSAyMUwxNSAxOC41TTE3LjUgMjFMMjAgMTguNSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPiA8L2c+Cg08L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: rotate(0deg);
+   }
+   a.my-button:hover{
+    background: linear-gradient(to right,#68a1ef ,#6a9fcc);
+    background-color: #68a1ef;
+    text-decoration: none;
+   }
+   a.my-button:active{
+    transform: scale(0.95);
+   }

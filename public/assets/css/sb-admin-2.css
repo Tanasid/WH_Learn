@@ -10105,7 +10105,7 @@ a:focus {
 }
 
 .progress-sm {
-  height: .5rem;
+  height: .5rem !important;
 }
 
 .rotate-15 {

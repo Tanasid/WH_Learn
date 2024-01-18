@@ -24,6 +24,8 @@ class Login extends Controller
         $emp_code = $this->request->getVar('emp_code');
         $emp_password = $this->request->getVar('emp_password');
         $mdPass = md5($emp_password);
+        //****************************************//
+        $ipAddress = "http://172.21.64.35/";
 
         if (preg_match('/[ก-๏เแโใไ]/u', $emp_password)) {
             // หากรหัสผ่านมีตัวอักษรภาษาไทย
@@ -65,6 +67,7 @@ class Login extends Controller
                     'spg_id' => $data['spg_id'],
                     'firstname' => $data['su_firstname'],
                     'lastname' => $data['su_lastname'],
+                    'ipAddress' => $ipAddress,
                     'user_group_id' => $data['spg_id'],
                     'logged_in' => TRUE,
                     'altLogin' => $altLoginSuccess,
@@ -117,6 +120,7 @@ class Login extends Controller
 
         $session->destroy();
         return redirect()->to('/login');
+        
     }
 
     // public function logged() {

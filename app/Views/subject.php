@@ -13,7 +13,7 @@
     </div>
 
 
-    <div class="card mt-3 mx-auto" style="width: 90%;">
+    <div class="card mt-3 mx-auto shadow" style="width: 90%;">
         <div class="card-header text-primary fs-5 fw-bold text-decoration-underline bg-white">
             Subject List
         </div>
@@ -24,6 +24,7 @@
                     <th class=" text-center text-dark" style="--bs-text-opacity: .8;">No.</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Subject Name</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Method</th>
+                    <th class="text-center text-dark" style="--bs-text-opacity: .8;">Link</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Document</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Status</th>
                     <th class="text-center text-dark" style="--bs-text-opacity: .8;">Action</th>

@@ -136,6 +136,8 @@ class Subject extends Controller
         $ss_method = $this->request->getPost('ss_method');
         $ss_document = $this->request->getPost('ss_document');
         $subject_doc = $this->request->getFile('ss_document_new');
+        $ss_link = $this->request->getPost('ss_link');
+        $subject_link = $this->request->getFile('ss_link_new');
         $ss_date = date('Y-m-d H:i:s');
         $ss_by = $session->get('emp_code');
 
@@ -146,16 +148,20 @@ class Subject extends Controller
         $checkMethod = $db->query("SELECT ss_method FROM sys_subject WHERE ss_method = '$ss_method' AND ss_id <> $ss_id");
         $ResultMethod = $checkMethod->getResultArray();
 
-        $checkDoc = $db->query("SELECT ss_document FROM sys_subject WHERE ss_document = '$ss_document' ");
+        $checkLink = $db->query("SELECT ss_link FROM sys_subject WHERE ss_link = '$ss_link' AND ss_id = '$ss_id' ");
+        $ResultLink = $checkLink->getResultArray();
+        
+        $checkDoc = $db->query("SELECT ss_document FROM sys_subject WHERE ss_document = '$ss_document' AND ss_id = '$ss_id' ");
         $ResultDoc = $checkDoc->getResultArray();
-
+        
+        // return $this->response->setJSON(['success' => false, 'message' => count($ResultLink).' And '.count($ResultDoc)]);
 
         if (count($ResultName) >= 1) {
             return $this->response->setJSON(['success' => false, 'message' => 'Subject Name is already exist']);
         } else if (count($ResultMethod) >= 1) {
             return $this->response->setJSON(['success' => false, 'message' => 'Method is already exist']);
-        } else if (count($ResultDoc) >= 1) {
-            // return $this->response->setJSON(['success' => false, 'message' => 'Hello Document OLD']);
+        } else if (count($ResultDoc) >= 1 && count($ResultLink) >= 1) {
+            // return $this->response->setJSON(['error' => true, 'message' => 'This Here']);
             $query = $db->query("UPDATE sys_subject
             SET ss_subject_name = '$ss_subject_name', ss_method = '$ss_method', ss_updated_date = '$ss_date', ss_updated_by = '$ss_by' WHERE ss_id = $ss_id");
 
@@ -164,8 +170,24 @@ class Subject extends Controller
             } else {
                 return $this->response->setJSON(['success' => false, 'message' => 'Failed to update subject']);
             }
-        } else if (count($ResultDoc) == 0) {
-            // return $this->response->setJSON(['success' => false, 'message' => 'Hello Document New!!!']);
+        } else if (count($ResultDoc) >= 1 && count($ResultLink) == 0) {
+
+            ////////////////////////  File Move  ///////////////////////////
+            if ($subject_link->isValid() && !$subject_link->hasMoved()) {
+                $subject_link_name = $subject_link->getRandomName();
+                // $pathDocument = FCPATH . 'uploads/'. $subject_doc_name;
+                $pathLink = 'uploads/' . $subject_link_name;
+                $subject_link->move('uploads/', $subject_link_name);
+            }
+            $query = $db->query("UPDATE sys_subject
+            SET ss_subject_name = '$ss_subject_name', ss_method = '$ss_method', ss_link = '$pathLink', ss_updated_date = '$ss_date', ss_updated_by = '$ss_by' WHERE ss_id = $ss_id");
+
+            if ($query) {
+                return $this->response->setJSON(['success' => true, 'message' => 'Updated successfully']);
+            } else {
+                return $this->response->setJSON(['success' => false, 'message' => 'Failed to update subject']);
+            }
+        } else if (count($ResultDoc) == 0 && count($ResultLink) >= 1) {
 
             ////////////////////////  File Move  ///////////////////////////
             if ($subject_doc->isValid() && !$subject_doc->hasMoved()) {
@@ -183,6 +205,8 @@ class Subject extends Controller
             } else {
                 return $this->response->setJSON(['success' => false, 'message' => 'Failed to update subject']);
             }
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'This Here ELSE']);
         }
     }
 }

@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Explanner</h1>
+    <h1 class="h3 mb-2 text-gray-800">Factory Automation</h1>
     <hr>
 
     <div class="row d-flex justify-content-between">

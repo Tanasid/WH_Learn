@@ -19,7 +19,7 @@ class Menupermission extends Controller
         AND mm.smm_status_flg = 1
         AND md.spd_status_flg = 1
         GROUP BY mm.smm_name
-        ORDER BY mm.smm_order", [$session->get('spg_id')] );
+        ORDER BY mm.smm_order ASC", [$session->get('spg_id')] );
 
         $data = $query->getResultArray(); // Fetch results as an array
 

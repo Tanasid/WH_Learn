@@ -11,7 +11,7 @@ $(() => {
 
         $.ajax({
             type: "get",
-            url: "/explanner/getDocument", // Replace with your server endpoint to update the state
+            url: "/FA/getDocument", // Replace with your server endpoint to update the state
             dataType: 'json',
             success: function (response) {
                 const data = response[0];
@@ -71,7 +71,7 @@ $(() => {
         function checkTimeContent(timeContent, su_id, ss_id) {
             // AJAX call to fetch plant data
             $.ajax({
-                url: '/explanner/checkTimeContent',
+                url: '/FA/checkTimeContent',
                 method: 'POST',
                 data: { timeContent: timeContent, su_id: su_id, ss_id: ss_id },
                 type: 'json',
@@ -97,7 +97,7 @@ $(() => {
 
         function updateCurrentTime(cru_time, su_id, ss_id) {
             $.ajax({
-                url: '/explanner/updateTimeCurrent',
+                url: '/FA/updateTimeCurrent',
                 method: 'POST',
                 data: { cru_time: cru_time, su_id: su_id, ss_id: ss_id },
                 type: 'json',

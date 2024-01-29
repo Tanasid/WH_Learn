@@ -40,6 +40,7 @@ $routes->get('/start', 'Dashboard::index', ['filter' => 'auth']);
 // DashBoard //
 $routes->get('/dashboard/getView', 'Dashboard::getView',);
 $routes->get('/dashboard/getUser', 'Dashboard::getUser',);
+$routes->get('/dashboard/getSubject', 'Dashboard::getSubject',);
 
 
 // ManageAccount //
@@ -120,10 +121,23 @@ $routes->get('/infoSubject/getDepartment', 'InfoSubject::getDepartment',);
 $routes->get('/infoSubject/getSubject', 'InfoSubject::getSubject',);
 $routes->get('/infoSubject/getDepById', 'InfoSubject::getDepById',);
 $routes->post('/infoSubject/updateStatusFlg', 'InfoSubject::updateStatusFlg',);
+$routes->post('/infoSubject/addInfoSubject', 'infoSubject::addInfoSubject',);
 
 // Explanner //
 $routes->get('/explanner', 'Explanner::index', ['filter' => 'auth']);
 $routes->get('/explanner/getDocument', 'Explanner::getDocument',);
+$routes->post('/explanner/checkTimeContent', 'Explanner::checkTimeContent',);
+$routes->post('/explanner/updateTimeCurrent', 'Explanner::updateTimeCurrent',);
+
+// FA //
+$routes->get('/FA', 'FA::index', ['filter' => 'auth']);
+$routes->get('/FA/getDocument', 'FA::getDocument',);
+$routes->post('/FA/checkTimeContent', 'FA::checkTimeContent',);
+$routes->post('/FA/updateTimeCurrent', 'FA::updateTimeCurrent',);
+
+//OwnOverview
+$routes->get('/ownOverview', 'OwnOverview::index', ['filter' => 'auth']);
+$routes->get('/ownOverview/showProgress', 'OwnOverview::getDocument',);
 
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);

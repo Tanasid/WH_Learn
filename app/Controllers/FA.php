@@ -3,16 +3,15 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use CodeIgniter\Database\Query;
 
-class Explanner extends Controller
+class FA extends Controller
 {
     public function index()
     {
-        $content = view('explanner');
-        $anotherJS = '<script src="/assets/js/explanner.js"></script>';
+        $content = view('FA');
+        $anotherJS = '<script src="/assets/js/fa.js"></script>';
         $data = [
-            "title_page" => "Explanner",
+            "title_page" => "Factory Automation",
             "content" => $content,
             "anotherJS" => $anotherJS,
         ];
@@ -24,7 +23,7 @@ class Explanner extends Controller
     public function getDocument()
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM sys_subject WHERE ss_subject_name = 'Explanner' ");
+        $query = $db->query("SELECT * FROM sys_subject WHERE ss_subject_name = 'FA' ");
 
         $data = $query->getResultArray();
         return $this->response->setJSON($data);
@@ -84,6 +83,7 @@ class Explanner extends Controller
                 return $this->response->setJSON(['success' => false, 'message' => 'Error Updated Time less then!!!']);
             }
         }else {
+            number_format($ifo_crutime, 3);
             return $this->response->setJSON(['Message' => false, 'message' => 'The current time is less than the time previously recorded.', 'cru_time' => $ifo_crutime]);
         }
     }

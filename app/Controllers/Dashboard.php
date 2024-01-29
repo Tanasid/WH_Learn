@@ -7,7 +7,7 @@ use CodeIgniter\Controller;
 class Dashboard extends Controller
 {
     public function index()
-    {   
+    {
         $content = view('dashboard');
         $anotherJS = '
         <script src="/assets/js/dashboard.js"></script>
@@ -15,7 +15,7 @@ class Dashboard extends Controller
 
         // <script src="/assets/js/demo/chart-area-demo.js"></script>
         // <script src="/assets/js/demo/chart-pie-demo.js"></script>
-        
+
         $data = [
             "title_page" => "Dashboard",
             "content" => $content,
@@ -45,5 +45,26 @@ class Dashboard extends Controller
         return $this->response->setJSON($data); // Return JSON response
     }
 
+    public function getSubject()
+    {
+        $session = session();
+        $su_id = $session->get('su_id');
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT
+                                ifo.su_id,
+                                SUM( ifo.ifo_cru_time ) AS TotalCruTime,
+                                SUM( ifo.ifo_full_time ) AS TotalFullTime,
+                                CAST( CASE WHEN ifo.ifo_cru_time <> 0 THEN ( ifo.ifo_cru_time / ifo.ifo_full_time ) * 100 ELSE NULL END AS UNSIGNED ) AS summary 
+                            FROM
+                                info_overview ifo
+                                LEFT JOIN sys_user su ON su.su_id = ifo.su_id
+                                LEFT JOIN sys_subject ss ON ss.ss_id = ifo.ss_id 
+                            WHERE
+                                ifo.su_id = 1");
+
+        $data = $query->getResultArray(); // Fetch results as an array
+
+        return $this->response->setJSON($data); // Return JSON response
+    }
     
 }

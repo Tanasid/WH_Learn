@@ -25,7 +25,7 @@ class Login extends Controller
         $emp_password = $this->request->getVar('emp_password');
         $mdPass = md5($emp_password);
         //****************************************//
-        $ipAddress = "http://172.21.64.35/";
+        $ipAddress = "http://172.21.64.37/";
 
         if (preg_match('/[ก-๏เแโใไ]/u', $emp_password)) {
             // หากรหัสผ่านมีตัวอักษรภาษาไทย

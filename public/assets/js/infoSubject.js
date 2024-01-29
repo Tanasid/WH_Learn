@@ -3,6 +3,7 @@ $(() => {
     showSelDepartment()
     searchDep()
     updateStatusFlg()
+    addInfoSubject()
 
     function searchDep() {
         $(document).on('click', '#btnSearch', function () {
@@ -181,6 +182,64 @@ $(() => {
             });
 
         });
+    }
+
+    function addInfoSubject() {
+        $(document).on('click', '#btnAdd', function () {
+            var selSubject = $('#selSubject').val();
+            var selDept = $('#selDepartment').val();
+            // console.log(selDept+" <--> "+selSubject);
+            // return;
+            Swal.fire({
+                title: 'Confirm',
+                text: 'Do you want to add this info subject?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#28b76d',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    // User confirmed, perform the AJAX request
+                    $.ajax({
+                        type: 'POST',
+                        url: '/infoSubject/addInfoSubject', // Replace with the actual URL to your controller method
+                        data: {
+                            ss_id: selSubject,
+                            sd_id: selDept
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                // Show a success message using SweetAlert2
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: response.message,
+                                    icon: 'success'
+                                }).then(() => {
+                                    refleshTable();
+                                });
+
+                            } else {
+                                // Show an error message using SweetAlert2
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message,
+                                });
+                                return;
+                            }
+                        },
+                        error: function (error) {
+                            console.log('Error:', error);
+                        }
+                    });
+                }
+            });
+
+        })
     }
 
 })

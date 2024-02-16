@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=REM:wght@100;200;400;500;600;700;800&display=swap);
 @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@500&display=swap');
+
 .card {
     backdrop-filter: blur(5px) saturate(200%);
     -webkit-backdrop-filter: blur(5px) saturate(200%);
@@ -9,7 +10,9 @@
 }
 
 body {
-    background-image: url('/assets/image/TBKK151124-082.jpg');
+    /* background-image: url('/assets/image/test.jpg'); */
+    background: rgba(0, 0, 0, 0.1);
+    /* background: linear-gradient(90deg, rgba(69, 118, 208, 0.3) 20%, rgba(0, 212, 255, 1) 100%); */
     font-family: 'Livvic', sans-serif !important;
     background-position: center;
     background-size: cover;
@@ -22,23 +25,24 @@ html {
 }
 
 .login-box {
-    filter: blur(0.5px);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
-    background: rgba(66, 143, 206, 0.685);
-    box-sizing: border-box;
-    box-shadow: 0 0 25px rgba(87, 87, 87, 0.8);
-    border-radius: 10px; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: url(/assets/image/output-onlinegiftools.gif) center center no-repeat;
+  /* background-image: url('https://images.pexels.com/photos/4295841/pexels-photo-4295841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+  background-size: cover;
+  box-sizing: border-box;
+  box-shadow: 0 0 25px rgba(87, 87, 87, 0.8);
+  border-radius: 10px;
 }
 
 .login-box h1 {
     margin: 0 0 30px;
     padding: 0;
-    color: #fff;
+    color: #000;
     text-align: center;
 }
 
@@ -50,10 +54,10 @@ html {
     width: 100%;
     padding: 10px 0;
     font-size: 25px;
-    color: #fff;
+    color: #000;
     margin-bottom: 30px;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #000;
     outline: none;
     background: transparent;
 }
@@ -64,7 +68,7 @@ html {
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: #fff;
+    color: #000;
     pointer-events: none;
     transition: .5s;
 }
@@ -73,11 +77,11 @@ html {
 .login-box .user-box input:valid~label {
     top: -20px;
     left: 0;
-    color: #F8DE22;
+    color: #000;
     font-size: 12px;
 }
 
-.login-box form button{
+.login-box form button {
     margin-top: 40px;
     float: right;
 }
@@ -86,7 +90,7 @@ html {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
-    color: #F8DE22;
+    color: #00d9ff;
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
@@ -98,14 +102,15 @@ html {
 
 .login-box button a:hover {
     cursor: pointer;
-    background: #f8df22ab;
-    color: #fff;
-    font-size: 18.5px;
+    background: #00d9ffb0;
+    color: #01529e;
+    font-size: 20px;
+    font-weight: bold;
     border-radius: 5px;
-    box-shadow: 0 0 5px #F8DE22,
-        0 0 18px #F8DE22,
-        0 0 30px #F8DE22,
-        0 0 80px #F8DE22;
+    box-shadow: 0 0 5px #00d9ff,
+        0 0 18px #00d9ffb0,
+        0 0 30px #00d9ffb0,
+        0 0 80px #00d9ffb0;
 }
 
 .login-box button a span {
@@ -118,7 +123,7 @@ html {
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #F8DE22);
+    background: linear-gradient(90deg, transparent, #00d9ff);
     animation: btn-anim1 1s linear infinite;
 }
 
@@ -138,7 +143,7 @@ html {
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #F8DE22);
+    background: linear-gradient(180deg, transparent, #00d9ff);
     animation: btn-anim2 1s linear infinite;
     animation-delay: .25s
 }
@@ -159,7 +164,7 @@ html {
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #F8DE22);
+    background: linear-gradient(270deg, transparent, #00d9ff);
     animation: btn-anim3 1s linear infinite;
     animation-delay: .5s
 }
@@ -180,7 +185,7 @@ html {
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg, transparent, #F8DE22);
+    background: linear-gradient(360deg, transparent, #00d9ff);
     animation: btn-anim4 1s linear infinite;
     animation-delay: .75s
 }

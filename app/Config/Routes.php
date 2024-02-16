@@ -137,7 +137,12 @@ $routes->post('/FA/updateTimeCurrent', 'FA::updateTimeCurrent',);
 
 //OwnOverview
 $routes->get('/ownOverview', 'OwnOverview::index', ['filter' => 'auth']);
-$routes->get('/ownOverview/showProgress', 'OwnOverview::getDocument',);
+$routes->get('/ownOverview/showProgress', 'OwnOverview::showProgress',);
+
+//DeptOverview
+$routes->get('/departmentOverview', 'DeptOverview::index', ['filter' => 'auth']);
+$routes->get('/departmentOverview/showProgress', 'DeptOverview::showProgress',);
+$routes->get('/departmentOverview/getDepartment', 'DeptOverview::getDepartment',);
 
 // Login //
 $routes->get('/login', 'Home::index', ['filter' => 'authOut']);

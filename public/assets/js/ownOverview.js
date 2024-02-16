@@ -1,7 +1,9 @@
 $(() => {
 
+    showSubList()
 
-    function showAccount() {
+
+    function showSubList() {
         $.ajax({
             method: "get",
             url: "/ownOverview/showProgress",
@@ -11,44 +13,60 @@ $(() => {
                 if (response.length > 0) {
                     var html = "";
                     for (let i = 0; i < response.length; i++) {
+                        let progression;
                         const data = response[i];
-                        var btnStatus
-                        fetchSwitchID(data.su_id, function (statusFlg) {
-                            const statusGet = statusFlg[0];
-                            // console.log(statusGet);
-                            if (statusGet['su_status_flg'] == 1) {
-                                btnStatus = `<button class="custom-btn btn-3 btnStatus" id="statusFlg" data-bs-toggle="modal" data-bs-target="#mdlStatus" value="${data.su_id}" data-id="${statusGet['su_status_flg']}" ><span>Enable</span></button>`
-                            } else {
-                                btnStatus = `<button class="custom-btn btn-5 btnStatus" id="statusFlg" data-bs-toggle="modal" data-bs-target="#mdlStatus" value="${data.su_id}" data-id="${statusGet['su_status_flg']}"><span>Disable</span></button>`
-                            }
-                            html += `
+                        progression = data.progress;
+                        // console.log(statusGet);
+                        if (progression <= 100 && progression >= 80) {
+                            progression = `<div class="d-flex justify-content-center col-auto">
+                            <div class="progress my-2 w-50 mr-3 shadow-sm">
+                                <div class="progress-bar bg-gradient-success" role="progressbar" style="width: ${data.progress}%" aria-valuenow="${data.progress}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold my-2 text-success"><span class="">${data.progress}%</span></h4>
+                        </div>`
+                        } else if (progression <= 79 && progression >= 50) {
+                            progression = `<div class="d-flex justify-content-center col-auto">
+                            <div class="progress my-2 w-50 mr-3 shadow-sm">
+                                <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: ${data.progress}%" aria-valuenow="${data.progress}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold my-2 text-warning"><span class="">${data.progress}%</span></h4>
+                        </div>`
+                        } else if (progression <= 49 && progression >= 1) {
+                            progression = `<div class="d-flex justify-content-center col-auto">
+                            <div class="progress my-2 w-50 mr-3 shadow-sm">
+                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: ${data.progress}%" aria-valuenow="${data.progress}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold my-2 text-danger"><span class="">${data.progress}%</span></h4>
+                        </div>`
+                        } else {
+                            progression = `<div class="d-flex justify-content-center col-auto">
+                            <div class="progress my-2 w-50 mr-3 shadow-sm">
+                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold my-2 text-danger"><span class="">0%</span></h4>
+                        </div>`
+                        }
+                        html += `
                             <tr>
-                                <td class="text-center">${i + 1}</td>
-                                <td class="text-center">${data.su_emp_code}</td>
-                                <td class="text-center">${data.spg_name}</td>
-                                <td class="text-center">${data.sd_department_name}</td>
-                                <td class="text-center">${data.su_firstname} ${data.su_lastname}</td>
-                                <td class="text-center">${data.su_email}</td>
-                                <td class="text-center">${btnStatus}</td>
-                                <td class="text-center">
-                                    <button data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEditAcc" class="custom-btn btn-12" data-id="${data.su_id}">
-                                        <span>Edit</span><span><i class="fas fa-wrench fa-lg"></i></span>
-                                    </button>
+                                <td>
+                                    <div class="mt-2" style="--bs-text-opacity: .8;">${i + 1}</div>
                                 </td>
+                                <td>
+                                    <div class="mt-2" style="--bs-text-opacity: .8;">${data.ss_subject_name}</div>
+                                </td>
+                                <td>${progression}</td>
                             </tr>`;
-                            $('#tblManageAccount').dataTable().fnDestroy()
-                            $("#tbody")
-                                .html(html)
-                                .promise()
-                                .done(() => {
-                                    $("#tblManageAccount").dataTable({
-                                        scrollX: true,
-                                        responsive: true
-                                    });
-
+                        $('#tblOwn').dataTable().fnDestroy()
+                        $("#tbody")
+                            .html(html)
+                            .promise()
+                            .done(() => {
+                                $("#tblOwn").dataTable({
+                                    scrollX: true,
+                                    responsive: true
                                 });
 
-                        })
+                            });
                     }
 
 

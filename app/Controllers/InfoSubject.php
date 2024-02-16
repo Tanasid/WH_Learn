@@ -81,7 +81,7 @@ class InfoSubject extends Controller
     public function addInfoSubject()
     {
         $session = session();
-        $su_id = $session->get('user_id');
+        // $su_id = $session->get('user_id');
         $ss_id = $this->request->getPost('ss_id');
         $sd_id = $this->request->getPost('sd_id');
         $date = date('Y-m-d H:i:s');
@@ -98,7 +98,7 @@ class InfoSubject extends Controller
             VALUES ('$ss_id', '$sd_id', 1, '$date', '$created_by', '$date', '$created_by')");
 
             if ($query) {
-                $query = $db->query("INSERT INTO info_overview (su_id, ss_id) VALUES ('$su_id', '$ss_id')");
+                // $query = $db->query("INSERT INTO info_overview (su_id, ss_id) VALUES ('$su_id', '$ss_id')");
                 return $this->response->setJSON(['success' => true, 'message' => 'Add info subject successfully']);
             } else {
                 return $this->response->setJSON(['success' => false, 'message' => 'Failed to Added info subject']);

@@ -44,30 +44,41 @@
     </section> -->
 
     <div class="login-box">
-        <h1>Login</h1>
-        <?php if (session()->getFlashdata('msg')) : ?>
-            <div class="alert alert-danger"><?= session()->getFlashdata('msg'); ?></div>
-        <?php endif; ?>
-        <form action="/login/auth" method="post">
-            <div class="user-box">
-                <input type="text" id="su_emp_code" name="emp_code" required>
-                <label>Username</label>
-            </div>
-            <div class="user-box">
-                <input type="password" id="emp_password" name="emp_password" required>
-                <label>Password</label>
-            </div>
-            <button type="submit" class="btn btn-none">
-                <a  class="">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Login
-                </a>
-            </button>
-        </form>
+        <div class="box-test">
+            <h1>Login</h1>
+            <?php if (session()->getFlashdata('msg')) : ?>
+                <div class="alert alert-danger"><?= session()->getFlashdata('msg'); ?></div>
+            <?php endif; ?>
+            <form action="/login/auth" method="post">
+                <div class="user-box">
+                    <input type="text" id="su_emp_code" name="emp_code" required>
+                    <label>Username</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" id="emp_password" name="emp_password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn btn-none">
+                    <a class="">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Login
+                    </a>
+                </button>
+            </form>
+        </div>
     </div>
+
+    <!-- <div class="login mx-auto">
+        <div class="form">
+            <h2>Welcome</h2>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <input type="submit" value="Sign In" class="submit">
+        </div>
+    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="/assets/js/login.js"></script>

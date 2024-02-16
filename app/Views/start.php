@@ -42,7 +42,6 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <div class="">
                 <?= view('page/topbar'); ?>
             </div>
@@ -101,7 +100,7 @@
 
 
     <!-- My js -->
-    
+
     <?= $anotherJS ?>
 
 

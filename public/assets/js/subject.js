@@ -74,7 +74,9 @@ $(() => {
         $(document).on('click', '#saveChanges', function () {
             const inpName = $('#inpSubjectName').val().trim();
             const inpMethod = $('#inpMethod').val().trim();
+            const inpLink = $('#ss_link')[0].files[0];
             const inpDocument = $('#document')[0].files[0];
+
             // console.log(inpName);
             // return;
             const thaiPattern = /[\u0E00-\u0E7F]/;
@@ -149,6 +151,14 @@ $(() => {
                         return $('#inpMethod').focus();
                     }
 
+                    if (inpLink == null) {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Link is required.',
+                            icon: 'error'
+                        });
+                        return $('#link').focus();
+                    }
 
                     if (inpDocument == null) {
                         Swal.fire({
@@ -163,6 +173,7 @@ $(() => {
                     const formData = new FormData();
                     formData.append('inpName', inpName);
                     formData.append('inpMethod', inpMethod);
+                    formData.append('inpLink', inpLink);
                     formData.append('inpDocument', inpDocument);
                     // Log the values
                     // for (const pair of formData.entries()) {
@@ -212,6 +223,29 @@ $(() => {
                 }
             });
         })
+
+        $('#callMdlAdd').on('hidden.bs.modal', function () {
+            $('#inpSubjectName').val('');
+            $('#inpMethod').val('');
+            $('#ss_link').val('');
+            $('#document').val('');
+        });
+
+
+        $(document).on('click', '#closeAddSubject', function () {
+            $('#inpSubjectName').val('');
+            $('#inpMethod').val('');
+            $('#ss_link').val('');
+            $('#document').val('');
+        })
+
+        $('#callMdlAdd').on('shown.bs.modal', function () {
+            $(this).find('input').on('keydown', function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                }
+            });
+        });
     }
 
     function updateStatusFlg() {
@@ -271,8 +305,8 @@ $(() => {
     }
 
     function editDepartment() {
-        var subName, method, pathDoc;
-        var oldID, oldName, oldMethod, oldDoc;
+        var subName, method, pathDoc, pathLink;
+        var oldID, oldName, oldMethod, oldDoc, oldLink;
 
         $(document).on('click', '#btnEditSub', function () {
             var subJectID = $(this).attr('data-id');

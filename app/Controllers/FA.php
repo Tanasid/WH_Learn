@@ -39,20 +39,19 @@ class FA extends Controller
         $ss_id = $this->request->getPost('ss_id');
 
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM info_overview WHERE su_id = $su_id and  ss_id = $ss_id");
+        $query = $db->query("SELECT * FROM info_overview WHERE su_id = $su_id and ss_id = $ss_id");
         $checkSubCurrent = $query->getResultArray();
 
         if (count($checkSubCurrent) == 0) {
             $query = $db->query("INSERT INTO info_overview (su_id, ss_id, ifo_updated_date, ifo_updated_by) VALUES ('$su_id', '$ss_id', '$date', '$emp_code')");
         }
 
-        $query = $db->query("SELECT * FROM info_overview WHERE su_id = $su_id and  ss_id = $ss_id");
             $checkSubCurrent = $query->getResultArray();
             $ifo_crutime = $checkSubCurrent[0]['ifo_cru_time'];
             if ($checkSubCurrent) {
                 $ifo_id = $checkSubCurrent[0]['ifo_id'];
 
-                if ($checkSubCurrent[0]['ifo_full_time'] != $timeContent) {
+                if ($checkSubCurrent[0]['ifo_full_time'] != number_format($timeContent, 3) ) {
                     $time_format = number_format($timeContent, 3);
                     $queryTimeFull = $db->query("UPDATE info_overview SET ifo_full_time = $time_format WHERE ifo_id = $ifo_id ");
                     if ($queryTimeFull) {

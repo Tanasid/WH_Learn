@@ -38,7 +38,7 @@
 </div>
 
 <!-- Edit Department Modal -->
-<div class="modal fade bg-dark" data-bs-keyboard="false" id="mdlEditDepartment" tabindex="-1" aria-labelledby="mdlEditDepartment" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" data-bs-keyboard="false" id="mdlEditDepartment" tabindex="-1" aria-labelledby="mdlEditDepartment" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

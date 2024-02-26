@@ -46,10 +46,19 @@ class Subject extends Controller
 
         $subject_name = $this->request->getPost('inpName');
         $subject_method = $this->request->getPost('inpMethod');
+        $subject_link = $this->request->getFile('inpLink');
         $subject_doc = $this->request->getFile('inpDocument');
 
 
-        ////////////////////////  File Move  ///////////////////////////
+        ////////////////////////  File Move Link  ///////////////////////////
+        if ($subject_link->isValid() && !$subject_link->hasMoved()) {
+            $subject_link_name = $subject_link->getRandomName();
+            // $pathDocument = FCPATH . 'uploads/'. $subject_doc_name;
+            $pathLink = 'uploads/' . $subject_link_name;
+            $subject_link->move('uploads/', $subject_link_name);
+        }
+
+        ////////////////////////  File Move Document  ///////////////////////////
         if ($subject_doc->isValid() && !$subject_doc->hasMoved()) {
             $subject_doc_name = $subject_doc->getRandomName();
             // $pathDocument = FCPATH . 'uploads/'. $subject_doc_name;
@@ -74,6 +83,7 @@ class Subject extends Controller
 
         $newData = [
             'ss_subject_name' => $subject_name,
+            'ss_link' => $pathLink,
             'ss_document' => $pathDocument,
             'ss_method' => $subject_method,
             'ss_status_flg' => 1,

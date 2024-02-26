@@ -80,6 +80,7 @@ $(() => {
                     let video = document.getElementById('videoContent');
                     if (response.success) {
                         console.log(response.message);
+                        // console.log(response.cru_time);
                         // console.log("startTime => " + response.cru_time);
                         if(response.cru_time == null) {
                             return;

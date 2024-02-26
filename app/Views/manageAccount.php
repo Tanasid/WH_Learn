@@ -35,7 +35,7 @@
 </div>
 
 <!-- Modal Add Account -->
-<div class="modal fade bg-dark" id="callMdlAdd" tabindex="-1" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" id="callMdlAdd" tabindex="-1" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,7 +108,7 @@
 </div>
 
 <!-- Modal Edit Account -->
-<div class="modal fade bg-dark" data-bs-keyboard="false" id="mdlEdit" tabindex="-1" aria-labelledby="mdlEdit" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" data-bs-keyboard="false" id="mdlEdit" tabindex="-1" aria-labelledby="mdlEdit" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">

@@ -39,7 +39,7 @@
 </div>
 
 <!-- Modal Add Subject  -->
-<div class="modal fade bg-dark" id="callMdlAdd" tabindex="-1" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" id="callMdlAdd" tabindex="-1" data-bs-keyboard="false" aria-labelledby="callMdlAdd" aria-hidden="true" data-bs-backdrop="none">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,6 +56,10 @@
                     <div class="mb-3 d-flex justify-content-between">
                         <label for="inpMethod" class="form-label col-3 fs-4">Method</label>
                         <input type="text" class="form-control" id="inpMethod">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <label for="ss_link" class="form-label col-3 fs-4">Link</label>
+                        <input type="file" class="form-control" id="ss_link"></input>
                     </div>
                     <div class="mb-3 d-flex justify-content-between">
                         <label for="document" class="form-label col-3 fs-4">Document</label>

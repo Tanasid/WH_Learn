@@ -15,7 +15,7 @@ $(() => {
             dataType: 'json',
             success: function (response) {
                 const data = response[0];
-                // console.log(data);
+                console.log(data);
                 $('#inpLink').val(data.ss_link);
                 $('#inpDocument').val(data.ss_document);
                 $('#downloadLink').attr('href', data.ss_document);
